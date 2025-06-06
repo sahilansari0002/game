@@ -1,6 +1,6 @@
 import React from 'react';
 import { GameProvider, useGame } from './context/GameContext';
-import UserRegistration from './components/UserRegistration';
+import AuthScreen from './components/AuthScreen';
 import AgeSelection from './components/AgeSelection';
 import LevelSelection from './components/LevelSelection';
 import GameScreen from './components/GameScreen';
@@ -9,11 +9,22 @@ import AppHeader from './components/AppHeader';
 import About from './components/About';
 
 const AppContent: React.FC = () => {
-  const { gameState, userProgress } = useGame();
+  const { gameState, userProgress, isAuthenticated, loading } = useGame();
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
   
   const renderScreen = () => {
-    if (!userProgress.name || !userProgress.age) {
-      return <UserRegistration />;
+    if (!isAuthenticated) {
+      return <AuthScreen onAuthSuccess={() => {}} />;
     }
     
     if (!userProgress.ageGroup) {
@@ -41,10 +52,10 @@ const AppContent: React.FC = () => {
         </div>
       </main>
       
-      <About />
+      {isAuthenticated && <About />}
       
       <footer className="py-4 text-center text-gray-500 text-sm">
-          Brain Buzz: Quest for Knowledge &copy; 2025
+        Brain Buzz: Brain Voyage &copy; 2025
       </footer>
     </div>
   );

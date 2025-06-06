@@ -28,6 +28,15 @@ const LevelSelection: React.FC = () => {
         <h2 className="text-3xl font-bold">Select a Level</h2>
       </div>
       
+      <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+        <div className="flex items-center">
+          <Award className="w-5 h-5 text-blue-600 mr-2" />
+          <span className="text-blue-800 font-medium">
+            You need 80% (8 out of 10 questions) to pass each level and unlock the next one.
+          </span>
+        </div>
+      </div>
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {levels.map((level) => {
           const isUnlocked = level.id <= userProgress.highestLevel;

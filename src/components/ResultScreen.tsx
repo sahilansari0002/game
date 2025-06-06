@@ -14,7 +14,7 @@ const ResultScreen: React.FC = () => {
   };
   
   const scorePercentage = calculatePercentage();
-  const isPassing = scorePercentage >= 70;
+  const isPassing = scorePercentage >= 80; // Updated to 80%
   const nextLevelUnlocked = isPassing && gameState.currentLevel === userProgress.highestLevel;
   
   return (
@@ -32,7 +32,7 @@ const ResultScreen: React.FC = () => {
               ? 'You ran out of time. Try again!' 
               : isPassing 
                 ? 'Great job! You passed this level.' 
-                : 'Keep trying! You need 70% to pass.'}
+                : 'Keep trying! You need 80% to pass.'} {/* Updated message */}
           </p>
         </div>
         
@@ -77,6 +77,9 @@ const ResultScreen: React.FC = () => {
               <p className="text-xl font-medium">
                 You answered {gameState.score} out of 10 questions correctly
               </p>
+              <p className="text-sm text-gray-600 mt-2">
+                {isPassing ? 'Excellent work!' : 'You need 8 or more correct answers to pass'}
+              </p>
             </div>
           </div>
         )}
@@ -117,7 +120,7 @@ const ResultScreen: React.FC = () => {
               variant="primary"
               className="flex items-center justify-center"
               fullWidth
-              disabled={gameState.currentLevel >= 50}
+              disabled={gameState.currentLevel >= 225}
             >
               Next Level
               <ArrowRight className="w-5 h-5 ml-2" />
